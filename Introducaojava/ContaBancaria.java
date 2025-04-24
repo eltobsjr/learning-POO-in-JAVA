@@ -1,6 +1,6 @@
 public class ContaBancaria {
-    private String numero;
-    private String titular;
+    private final String numero;
+    private final String titular;
     private long saldo;
 
     public ContaBancaria(String numero, String titular) {

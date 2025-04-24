@@ -1,9 +1,11 @@
+
+
 /**
  * Classe principal que demonstra o uso da classe ContaBancaria
  */
 public class Principal {
     public static void main(String[] args) {
-        // Criando uma nova conta bancária com número e titular
+        System.out.println("Bem-vindo ao sistema bancário!");
         ContaBancaria contaBancaria = new ContaBancaria("12345-6", "João Silva");
         
         // Realizando operações bancárias
