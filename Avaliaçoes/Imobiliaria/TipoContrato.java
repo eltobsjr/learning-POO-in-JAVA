@@ -1,0 +1,3 @@
+enum TipoContrato {
+    VENDA, ALUGUEL
+}
