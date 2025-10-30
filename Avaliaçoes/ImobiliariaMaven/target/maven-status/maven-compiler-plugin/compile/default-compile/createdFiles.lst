@@ -1,6 +1,10 @@
 br\edu\ifpi\DAO\ImovelDAO.class
 br\edu\ifpi\Model\Endereco.class
+br\edu\ifpi\Factory\ImovelFactory.class
+br\edu\ifpi\Factory\CasaFactory.class
+br\edu\ifpi\Factory\TipoImovel.class
 br\edu\ifpi\DAO\ClienteDAO.class
+br\edu\ifpi\Factory\ImovelFactory$1.class
 br\edu\ifpi\JPAUtil.class
 br\edu\ifpi\Model\Cliente.class
 br\edu\ifpi\DAO\EnderecoDAO.class
@@ -12,5 +16,6 @@ br\edu\ifpi\Model\TipoContrato.class
 br\edu\ifpi\Model\Apartamento.class
 br\edu\ifpi\Model\Casa.class
 br\edu\ifpi\Model\Pessoa.class
+br\edu\ifpi\Factory\ApartamentoFactory.class
 br\edu\ifpi\Model\Imovel.class
 br\edu\ifpi\Main.class

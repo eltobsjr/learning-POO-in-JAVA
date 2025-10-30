@@ -3,6 +3,10 @@ C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\ja
 C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\java\br\edu\ifpi\DAO\CorretorDAO.java
 C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\java\br\edu\ifpi\DAO\EnderecoDAO.java
 C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\java\br\edu\ifpi\DAO\ImovelDAO.java
+C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\java\br\edu\ifpi\Factory\ApartamentoFactory.java
+C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\java\br\edu\ifpi\Factory\CasaFactory.java
+C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\java\br\edu\ifpi\Factory\ImovelFactory.java
+C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\java\br\edu\ifpi\Factory\TipoImovel.java
 C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\java\br\edu\ifpi\JPAUtil.java
 C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\java\br\edu\ifpi\Main.java
 C:\Users\eltob\dev\learning-POO-in-JAVA\Avaliaçoes\ImobiliariaMaven\src\main\java\br\edu\ifpi\Model\Apartamento.java

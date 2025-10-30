@@ -2,6 +2,7 @@ package br.edu.ifpi;
 
 import br.edu.ifpi.Model.*;
 import br.edu.ifpi.DAO.*;
+import br.edu.ifpi.Factory.*;
 import java.util.*;
 import java.util.regex.Pattern;
 
@@ -475,7 +476,10 @@ public class Main {
         System.out.println(CYAN + "Tipo de imóvel:" + RESET);
         System.out.println("  [1] Casa");
         System.out.println("  [2] Apartamento");
-        int tipo = lerInteiro("Escolha o tipo: ", 1, 2);
+        int tipoEscolha = lerInteiro("Escolha o tipo: ", 1, 2);
+        
+        // Converte escolha numérica para enum TipoImovel
+        TipoImovel tipoImovel = (tipoEscolha == 1) ? TipoImovel.CASA : TipoImovel.APARTAMENTO;
         
         System.out.println(YELLOW + "\n--- Dados do Endereço ---" + RESET);
         String rua = lerStringObrigatoria("Rua: ");
@@ -492,23 +496,28 @@ public class Main {
             System.out.println(YELLOW + "\n--- Dados do Imóvel ---" + RESET);
             double valor = lerDoublePositivo("Valor do imóvel (R$): ");
             
+            // Usa Factory Method Pattern para criar o imóvel
+            ImovelFactory factory = ImovelFactory.getFactory(tipoImovel);
             Imovel imovel;
-            if (tipo == 1) {
+            
+            if (tipoImovel == TipoImovel.CASA) {
                 int quartos = lerInteiro("Número de quartos: ", 1, 50);
-                imovel = new Casa(endereco, valor, quartos);
+                imovel = factory.criarImovelCompleto(endereco, valor, quartos);
             } else {
                 int andar = lerInteiro("Andar: ", 0, 200);
                 double valorCondominio = lerDoublePositivo("Valor do condomínio (R$): ");
-                imovel = new Apartamento(endereco, valor, andar, valorCondominio);
+                imovel = factory.criarImovelCompleto(endereco, valor, andar, valorCondominio);
             }
             
             imovelDAO.salvar(imovel);
             exibirSucesso("Imóvel cadastrado com sucesso!");
             System.out.println(CYAN + "ID: " + RESET + imovel.getId());
-            System.out.println(CYAN + "Tipo: " + RESET + (tipo == 1 ? "Casa" : "Apartamento"));
+            System.out.println(CYAN + "Tipo: " + RESET + tipoImovel.getDescricao());
             System.out.println(CYAN + "Endereço: " + RESET + endereco);
             System.out.println(CYAN + "Valor: " + RESET + formatarValor(valor));
             
+        } catch (IllegalArgumentException e) {
+            exibirErro("Erro de validação: " + e.getMessage());
         } catch (Exception e) {
             exibirErro("Erro ao cadastrar imóvel: " + e.getMessage());
         }
@@ -723,9 +732,14 @@ public class Main {
             try {
                 Contrato contrato = new Contrato(imovel, cliente, corretor, valorFinal, tipo);
                 contratoDAO.salvar(contrato);
+                
+                // Atualiza o estado do imóvel no banco de dados
+                imovelDAO.atualizar(imovel);
+                
                 exibirSucesso("Contrato criado com sucesso!");
                 System.out.println(CYAN + "ID do Contrato: " + RESET + contrato.getId());
                 System.out.println(CYAN + "Data: " + RESET + contrato.getData());
+                exibirAviso("O imóvel ID " + imovel.getId() + " foi marcado como indisponível.");
             } catch (Exception e) {
                 exibirErro("Erro ao criar contrato: " + e.getMessage());
             }
