@@ -17,11 +17,30 @@ public class ContratoDAO {
             tx.commit();
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            e.printStackTrace();
+            throw new RuntimeException("Erro ao salvar contrato: " + e.getMessage(), e);
         } finally {
             em.close();
         }
     }
+    
+    public void remover(Long id) {
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            Contrato contrato = em.find(Contrato.class, id);
+            if (contrato != null) {
+                em.remove(contrato);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw new RuntimeException("Erro ao remover contrato: " + e.getMessage(), e);
+        } finally {
+            em.close();
+        }
+    }
+    
     public Contrato buscarPorId(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -30,6 +49,7 @@ public class ContratoDAO {
             em.close();
         }
     }
+    
     public List<Contrato> listarTodos() {
         EntityManager em = JPAUtil.getEntityManager();
         try {

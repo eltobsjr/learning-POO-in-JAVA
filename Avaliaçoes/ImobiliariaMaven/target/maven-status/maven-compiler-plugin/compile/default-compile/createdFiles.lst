@@ -1,0 +1,16 @@
+br\edu\ifpi\DAO\ImovelDAO.class
+br\edu\ifpi\Model\Endereco.class
+br\edu\ifpi\DAO\ClienteDAO.class
+br\edu\ifpi\JPAUtil.class
+br\edu\ifpi\Model\Cliente.class
+br\edu\ifpi\DAO\EnderecoDAO.class
+br\edu\ifpi\DAO\ContratoDAO.class
+br\edu\ifpi\Model\Corretor.class
+br\edu\ifpi\DAO\CorretorDAO.class
+br\edu\ifpi\Model\Contrato.class
+br\edu\ifpi\Model\TipoContrato.class
+br\edu\ifpi\Model\Apartamento.class
+br\edu\ifpi\Model\Casa.class
+br\edu\ifpi\Model\Pessoa.class
+br\edu\ifpi\Model\Imovel.class
+br\edu\ifpi\Main.class

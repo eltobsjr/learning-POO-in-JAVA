@@ -19,6 +19,7 @@ public class CorretorDAO {
             em.close();
         }
     }
+    
     public void salvar(Corretor corretor) {
         EntityManager em = JPAUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -28,11 +29,45 @@ public class CorretorDAO {
             tx.commit();
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            e.printStackTrace();
+            throw new RuntimeException("Erro ao salvar corretor: " + e.getMessage(), e);
         } finally {
             em.close();
         }
     }
+    
+    public void atualizar(Corretor corretor) {
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(corretor);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw new RuntimeException("Erro ao atualizar corretor: " + e.getMessage(), e);
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void remover(Long id) {
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            Corretor corretor = em.find(Corretor.class, id);
+            if (corretor != null) {
+                em.remove(corretor);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw new RuntimeException("Erro ao remover corretor: " + e.getMessage(), e);
+        } finally {
+            em.close();
+        }
+    }
+    
     public Corretor buscarPorId(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -41,6 +76,7 @@ public class CorretorDAO {
             em.close();
         }
     }
+    
     public Corretor buscarPorCpf(String cpf) {
         EntityManager em = JPAUtil.getEntityManager();
         try {

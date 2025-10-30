@@ -19,6 +19,7 @@ public class ClienteDAO {
             em.close();
         }
     }
+    
     public void salvar(Cliente cliente) {
         EntityManager em = JPAUtil.getEntityManager();
         EntityTransaction tx = em.getTransaction();
@@ -28,11 +29,45 @@ public class ClienteDAO {
             tx.commit();
         } catch (Exception e) {
             if (tx.isActive()) tx.rollback();
-            e.printStackTrace();
+            throw new RuntimeException("Erro ao salvar cliente: " + e.getMessage(), e);
         } finally {
             em.close();
         }
     }
+    
+    public void atualizar(Cliente cliente) {
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            em.merge(cliente);
+            tx.commit();
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw new RuntimeException("Erro ao atualizar cliente: " + e.getMessage(), e);
+        } finally {
+            em.close();
+        }
+    }
+    
+    public void remover(Long id) {
+        EntityManager em = JPAUtil.getEntityManager();
+        EntityTransaction tx = em.getTransaction();
+        try {
+            tx.begin();
+            Cliente cliente = em.find(Cliente.class, id);
+            if (cliente != null) {
+                em.remove(cliente);
+            }
+            tx.commit();
+        } catch (Exception e) {
+            if (tx.isActive()) tx.rollback();
+            throw new RuntimeException("Erro ao remover cliente: " + e.getMessage(), e);
+        } finally {
+            em.close();
+        }
+    }
+    
     public Cliente buscarPorId(Long id) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
@@ -41,6 +76,7 @@ public class ClienteDAO {
             em.close();
         }
     }
+    
     public Cliente buscarPorCpf(String cpf) {
         EntityManager em = JPAUtil.getEntityManager();
         try {
